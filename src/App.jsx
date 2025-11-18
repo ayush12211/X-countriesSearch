@@ -1,0 +1,82 @@
+import React, { useEffect, useState } from "react";
+
+const XCountries = () => {
+  const [countries, setCountries] = useState([]);
+  const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    async function fetchCountries() {
+      try {
+        const res = await fetch("https://xcountries-backend.labs.crio.do/all");
+        const data = await res.json();
+        setCountries(data);
+      } catch (err) {
+        console.log("error fetching : ", err);
+      }
+    }
+    fetchCountries();
+  }, []);
+
+  // FILTER COUNTRIES HERE
+  const filteredCountries = countries.filter((country) =>
+    country.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  return (
+    <>
+      <div style={{ width: "100%", textAlign: "center" }}>
+        <input
+          type="text"
+          placeholder="searchCountries..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          style={{
+            width: "600px",
+            padding: "12px",
+            margin: "20px 0",
+            fontSize: "16px",
+            borderRadius: "8px",
+            border: "1px solid #ccc",
+            outline: "none",
+            boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+          }}
+        />
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          gap: "20px",
+        }}
+      >
+        {filteredCountries.map((country, index) => {
+          return (
+            <div
+              key={index}
+              style={{
+                border: "1px solid #ccc",
+                borderRadius: "8px",
+                padding: "10px",
+                width: "180px",
+                textAlign: "center",
+                background: "white",
+                boxShadow: "0 2px 6px rgba(0,0,0,0.12)",
+              }}
+            >
+              <img
+                src={country.flag}
+                alt={country.name}
+                style={{ width: "120px", height: "80px", objectFit: "contain" }}
+              />
+              <h3 style={{ fontSize: "16px" }}>{country.name}</h3>
+            </div>
+          );
+        })}
+      </div>
+    </>
+  );
+};
+
+export default XCountries;
