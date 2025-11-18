@@ -11,13 +11,13 @@ const XCountries = () => {
         const data = await res.json();
         setCountries(data);
       } catch (err) {
-        console.log("error fetching : ", err);
+        console.log("error fetching : ", err);  // required by tests
       }
     }
     fetchCountries();
   }, []);
 
-  // FILTER COUNTRIES HERE
+  // FILTER COUNTRIES
   const filteredCountries = countries.filter((country) =>
     country.name.toLowerCase().includes(search.toLowerCase())
   );
@@ -37,8 +37,6 @@ const XCountries = () => {
             fontSize: "16px",
             borderRadius: "8px",
             border: "1px solid #ccc",
-            outline: "none",
-            boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
           }}
         />
       </div>
@@ -51,29 +49,38 @@ const XCountries = () => {
           gap: "20px",
         }}
       >
-        {filteredCountries.map((country, index) => {
-          return (
-            <div
-              key={index}
-              style={{
-                border: "1px solid #ccc",
-                borderRadius: "8px",
-                padding: "10px",
-                width: "180px",
-                textAlign: "center",
-                background: "white",
-                boxShadow: "0 2px 6px rgba(0,0,0,0.12)",
-              }}
-            >
-              <img
-                src={country.flag}
-                alt={country.name}
-                style={{ width: "120px", height: "80px", objectFit: "contain" }}
-              />
-              <h3 style={{ fontSize: "16px" }}>{country.name}</h3>
-            </div>
-          );
-        })}
+        {filteredCountries.length > 0 ? (
+          filteredCountries.map((country, index) => {
+            return (
+              <div
+                key={index}
+                className="countryCard"   // REQUIRED BY TEST CASES
+                style={{
+                  border: "1px solid #ccc",
+                  borderRadius: "8px",
+                  padding: "10px",
+                  width: "180px",
+                  textAlign: "center",
+                  background: "white",
+                  boxShadow: "0 2px 6px rgba(0,0,0,0.12)",
+                }}
+              >
+                <img
+                  src={country.flag}
+                  alt={country.name}
+                  style={{
+                    width: "120px",
+                    height: "80px",
+                    objectFit: "contain",
+                  }}
+                />
+                <h3 style={{ fontSize: "16px" }}>{country.name}</h3>
+              </div>
+            );
+          })
+        ) : (
+          <p>No results found</p> // REQUIRED BY TEST: show nothing if no match
+        )}
       </div>
     </>
   );
