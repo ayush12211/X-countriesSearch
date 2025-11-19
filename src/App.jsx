@@ -77,7 +77,7 @@ const XCountries = () => {
                     objectFit: "contain",
                   }}
                 />
-                <h3 style={{ fontSize: "16px" }}>{country.name}</h3>
+                <h2 style={{ fontSize: "16px" }}>{country.name}</h2>
               </div>
             );
           })
