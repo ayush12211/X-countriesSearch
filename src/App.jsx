@@ -18,9 +18,11 @@ const XCountries = () => {
   }, []);
 
   // FILTER COUNTRIES
-  const filteredCountries = countries.filter((country) =>
-  country.name?.toLowerCase().includes(search.toLowerCase())
-);
+   const filteredCountries = countries.filter((country) => {
+    const name = country.name || ""; // fallback if undefined
+    const searchText = search || ""; // ensure search is string
+    return name.toLowerCase().includes(searchText.toLowerCase());
+  }); 
 
   return (
     <>
