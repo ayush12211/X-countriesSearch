@@ -36,7 +36,7 @@ const XCountries = () => {
             margin: "20px 0",
             fontSize: "16px",
             borderRadius: "8px",
-            border: "1px solid #ccc",
+            border: "1px solid #090101ff",
           }}
         />
       </div>
@@ -59,10 +59,11 @@ const XCountries = () => {
                   border: "1px solid #ccc",
                   borderRadius: "8px",
                   padding: "10px",
-                  width: "180px",
+                  width: "150px",
+                  height:"150px",
                   textAlign: "center",
                   background: "white",
-                  boxShadow: "0 2px 6px rgba(0,0,0,0.12)",
+                  // boxShadow: "0 2px 6px rgba(0,0,0,0.12)",
                 }}
               >
                 <img
