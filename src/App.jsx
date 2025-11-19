@@ -11,7 +11,7 @@ const XCountries = () => {
         const data = await res.json();
         setCountries(data);
       } catch (err) {
-        console.log("error fetching : ", err);  // required by tests
+        console.log("error fetching : ", err);  
       }
     }
     fetchCountries();
@@ -19,8 +19,8 @@ const XCountries = () => {
 
   // FILTER COUNTRIES
   const filteredCountries = countries.filter((country) =>
-    country.name.toLowerCase().includes(search.toLowerCase())
-  );
+  country.name?.toLowerCase().includes(search.toLowerCase())
+);
 
   return (
     <>
@@ -54,7 +54,7 @@ const XCountries = () => {
             return (
               <div
                 key={index}
-                className="countryCard"   // REQUIRED BY TEST CASES
+                className="countryCard"   
                 style={{
                   border: "1px solid #ccc",
                   borderRadius: "8px",
@@ -80,7 +80,7 @@ const XCountries = () => {
             );
           })
         ) : (
-          <p>No results found</p> // REQUIRED BY TEST: show nothing if no match
+          <p>No results found</p> 
         )}
       </div>
     </>
