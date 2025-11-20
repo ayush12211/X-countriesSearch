@@ -7,22 +7,22 @@ const XCountries = () => {
   useEffect(() => {
     async function getCountry() {
       try {
-        const res = await fetch("https://xcountries-backend.labs.crio.do/all");
+        const res = await fetch("https://countries-search-data-prod-812920491762.asia-south1.run.app/countries");
         const data = await res.json();
         setCountries(data);
       } catch (err) {
-        console.error("error fetching data: ", err);  
+        console.error("error fetching data: ", err);
       }
     }
     getCountry();
   }, []);
 
   // FILTER COUNTRIES
-   const filteredCountries = countries.filter((country) => {
+  const filteredCountries = countries.filter((country) => {
     const name = country.name || ""; // fallback if undefined
     const searchText = search || ""; // ensure search is string
     return name.toLowerCase().includes(searchText.toLowerCase());
-  }); 
+  });
 
   return (
     <>
@@ -45,10 +45,17 @@ const XCountries = () => {
 
       <div
         style={{
+          width: "100%",
+          maxWidth: "1200px",
+          margin: "0 auto",
+          height: "600px", // FIXED HEIGHT → prevents movement
+          overflowY: "auto", // scroll inside, layout stable
+          paddingTop: "20px",
           display: "flex",
           flexWrap: "wrap",
           justifyContent: "center",
           gap: "20px",
+          boxSizing: "border-box",
         }}
       >
         {filteredCountries.length > 0 ? (
@@ -56,13 +63,13 @@ const XCountries = () => {
             return (
               <div
                 key={index}
-                className="countryCard"   
+                className="countryCard"
                 style={{
                   border: "1px solid #ccc",
                   borderRadius: "8px",
                   padding: "10px",
                   width: "150px",
-                  height:"150px",
+                  height: "150px",
                   textAlign: "center",
                   background: "white",
                   // boxShadow: "0 2px 6px rgba(0,0,0,0.12)",
@@ -82,7 +89,7 @@ const XCountries = () => {
             );
           })
         ) : (
-          <p>No results found</p> 
+          <p>No results found</p>
         )}
       </div>
     </>
