@@ -5,16 +5,16 @@ const XCountries = () => {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    async function fetchCountries() {
+    async function getCountry() {
       try {
         const res = await fetch("https://xcountries-backend.labs.crio.do/all");
         const data = await res.json();
         setCountries(data);
       } catch (err) {
-        console.log("error fetching : ", err);  
+        console.error("error fetching data: ", err);  
       }
     }
-    fetchCountries();
+    getCountry();
   }, []);
 
   // FILTER COUNTRIES
