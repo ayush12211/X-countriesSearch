@@ -19,7 +19,7 @@ const XCountries = () => {
 
   // FILTER COUNTRIES
   const filteredCountries = countries.filter((country) => {
-    const name = country.name || ""; // fallback if undefined
+    const name = country.common || ""; // fallback if undefined
     const searchText = search || ""; // ensure search is string
     return name.toLowerCase().includes(searchText.toLowerCase());
   });
@@ -76,15 +76,15 @@ const XCountries = () => {
                 }}
               >
                 <img
-                  src={country.flag}
-                  alt={country.name}
+                  src={country.png}
+                  alt={country.common}
                   style={{
                     width: "120px",
                     height: "80px",
                     objectFit: "contain",
                   }}
                 />
-                <h2 style={{ fontSize: "16px" }}>{country.name}</h2>
+                <h2 style={{ fontSize: "16px" }}>{country.common}</h2>
               </div>
             );
           })
